@@ -32,8 +32,6 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 8277377A \
   --without-fftw \
   --without-fpx \
   --without-djvu \
-  --without-fontconfig \
-  --without-freetype \
   --without-jbig \
   --without-lcms \
   --without-lcms2 \
