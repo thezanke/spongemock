@@ -56,4 +56,4 @@ COPY package.json .
 RUN npm install --silent
 COPY src .
 
-CMD ["node", "start"]
+CMD ["npm", "start"]
