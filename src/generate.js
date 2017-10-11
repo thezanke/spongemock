@@ -8,7 +8,7 @@ const alternateCase = str =>
     .map((char, i) => (i % 2 === 0 ? char : char.toUpperCase()))
     .join('');
 
-module.exports = (text) => {
+const generate = (text, cb) => {
   console.log(`generating meme for: "${text}"`);
 
   const words = alternateCase(text).split(' ');
@@ -25,12 +25,8 @@ module.exports = (text) => {
       bottomCaption,
       outputFile,
     },
-    (err, captionedImg) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log(captionedImg);
-    },
+    cb,
   );
 };
+
+module.exports = generate;
