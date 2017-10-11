@@ -53,7 +53,8 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 8277377A \
 
 WORKDIR /home/node/app
 COPY package.json .
-RUN npm install --silent
+ENV NODE_ENV=production
+RUN npm install --production --silent
 COPY src ./src
 
 CMD ["npm", "start"]
