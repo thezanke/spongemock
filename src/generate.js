@@ -13,7 +13,7 @@ const generate = (text, cb) => {
 
   const mockText = randomCase(text);
   const words = mockText.split(' ');
-  const half = Math.floor(words.length / 2);
+  const half = Math.ceil(words.length / 2);
   const topCaption = words.slice(0, half).join(' ');
   const bottomCaption = words.slice(half).join(' ');
 
