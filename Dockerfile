@@ -54,6 +54,6 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 8277377A \
 WORKDIR /home/node/app
 COPY package.json .
 RUN npm install --silent
-COPY src .
+COPY src ./src
 
 CMD ["npm", "start"]
