@@ -7,7 +7,7 @@ const router = Router();
 router.post('/', (req, res) => {
   const { text } = req.body;
   generateMeme(text);
-  res.json({ text: 'one moment please...' });
+  res.json({ text: 'one moment please, polishing meme...' });
 });
 
 module.exports = router;
