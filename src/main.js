@@ -8,7 +8,7 @@ const notFound = require('./not-found');
 const app = express();
 
 app.use(helmet());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(controller);
 app.use(notFound);
 
