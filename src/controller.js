@@ -24,7 +24,12 @@ router.post('/', (req, res) => {
       return;
     }
 
-    console.log(`Responding to slack at: ${responseUrl}`);
+    const body = {
+      response_type: 'in_channel',
+      attachments: [{ fallback: mockText, pretext: mockText, image_url: imageUrl }],
+    };
+    console.log(`Responding to slack at ${responseUrl} with body:`);
+    console.log(JSON.stringify(body, null, 2));
 
     try {
       const post = await fetch(responseUrl, {
@@ -32,18 +37,15 @@ router.post('/', (req, res) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          response_type: 'in_channel',
-          attachments: [{ fallback: mockText, pretext: mockText, image_url: imageUrl }],
-        }),
+        body: JSON.stringify(body),
       });
 
       if (!post.ok) {
         console.error('something went wrong?');
       }
 
-      const json = await post.json();
-      console.log(json);
+      const textRes = await post.text();
+      console.log(textRes);
     } catch (e) {
       console.error(e);
     }
