@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
@@ -8,6 +9,7 @@ const notFound = require('./not-found');
 const app = express();
 
 app.use(helmet());
+app.use('/images', express.static(path.join(__dirname, '../images')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(controller);
 app.use(notFound);

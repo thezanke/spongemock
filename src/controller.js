@@ -25,15 +25,18 @@ router.post('/', (req, res) => {
     }
 
     try {
-      const res = await fetch(responseUrl, {
+      const post = await fetch(responseUrl, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           response_type: 'in_channel',
           attachments: [{ image_url: imageUrl }],
         }),
       });
 
-      if (!res.ok) {
+      if (!post.ok) {
         console.error('something went wrong?');
       }
     } catch (e) {
