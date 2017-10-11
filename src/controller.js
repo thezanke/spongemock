@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
 
   res.status(200).json({ text: 'one moment please, polishing meme...' });
 
-  generate(text, async (err, img) => {
+  generate(text, async (err, img, mockText) => {
     if (err) {
       console.error(err);
       return;
@@ -24,6 +24,8 @@ router.post('/', (req, res) => {
       return;
     }
 
+    console.log(`Responding to slack at: ${responseUrl}`);
+
     try {
       const post = await fetch(responseUrl, {
         method: 'POST',
@@ -32,13 +34,16 @@ router.post('/', (req, res) => {
         },
         body: JSON.stringify({
           response_type: 'in_channel',
-          attachments: [{ image_url: imageUrl }],
+          attachments: [{ fallback: mockText, pretext: mockText, image_url: imageUrl }],
         }),
       });
 
       if (!post.ok) {
         console.error('something went wrong?');
       }
+
+      const json = await post.json();
+      console.log(json);
     } catch (e) {
       console.error(e);
     }

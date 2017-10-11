@@ -11,7 +11,8 @@ const alternateCase = str =>
 const generate = (text, cb) => {
   console.log(`generating meme for: "${text}"`);
 
-  const words = alternateCase(text).split(' ');
+  const mockText = alternateCase(text);
+  const words = mockText.split(' ');
   const half = Math.floor(words.length / 2);
   const topCaption = words.slice(0, half).join(' ');
   const bottomCaption = words.slice(half).join(' ');
@@ -25,7 +26,7 @@ const generate = (text, cb) => {
       bottomCaption,
       outputFile,
     },
-    cb,
+    (err, imgPath) => cb(err, imgPath, mockText),
   );
 };
 
