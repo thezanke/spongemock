@@ -1,4 +1,3 @@
-module.exports = (message) => {
-  console.log('generating meme for: ');
-  console.log(JSON.stringify(message, null, 2));
+module.exports = (text) => {
+  console.log(`generating meme for: "${text}"`);
 };
