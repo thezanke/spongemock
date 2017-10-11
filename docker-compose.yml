@@ -8,6 +8,8 @@ services:
       - NODE_ENV=production
     volumes:
       - ./src:/home/node/app/src
+      - ./node_modules:/home/node/app/node_modules
+      - ./images:/home/node/app/images
     expose:
       - "5000"
     command: "npm run dev"
