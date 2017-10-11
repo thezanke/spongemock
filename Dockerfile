@@ -52,8 +52,11 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 8277377A \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /home/node/app
+RUN mkdir /home/node/app/images
+
 COPY package.json .
 RUN npm install --silent
+
 COPY src ./src
 
 CMD ["npm", "start"]
