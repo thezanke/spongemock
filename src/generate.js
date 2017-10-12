@@ -20,7 +20,7 @@ const generate = (text, cb) => {
   const outputFile = `./images/mockbob-${randomstring.generate(5)}.jpg`;
 
   caption.path(
-    './src/mockbob.jpg',
+    `${__dirname}/img/mockbob.jpg`,
     {
       caption: topCaption,
       bottomCaption,
