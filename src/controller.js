@@ -7,7 +7,9 @@ const generate = require('./generate');
 const router = Router();
 
 router.post('/', (req, res) => {
-  const { text, response_url: responseUrl } = req.body;
+  const { text, response_url: responseUrl, user_id: userId } = req.body;
+
+  console.log(req.body);
 
   res.status(200).json({ text: 'one moment please, polishing meme...' });
 
@@ -26,7 +28,7 @@ router.post('/', (req, res) => {
 
     const body = {
       response_type: 'in_channel',
-      attachments: [{ fallback: mockText, pretext: mockText, image_url: imageUrl }],
+      attachments: [{ fallback: mockText, pretext: `<@${userId}> says:`, image_url: imageUrl }],
     };
     console.log(`Responding to slack at ${responseUrl} with body:`);
     console.log(JSON.stringify(body, null, 2));
