@@ -2,7 +2,7 @@ FROM node:8-jessie
 
 # Based on and all credit to https://store.docker.com/community/images/starefossen/node-imagemagick
 ENV MAGICK_URL "http://imagemagick.org/download/releases"
-ENV MAGICK_VERSION 7.0.7-7
+ENV MAGICK_VERSION 7.0.8-45
 
 RUN apt-get update -y \
   && apt-get install -y --no-install-recommends \
