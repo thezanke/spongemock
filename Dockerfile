@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:8-jessie
 
 # Based on and all credit to https://store.docker.com/community/images/starefossen/node-imagemagick
 ENV MAGICK_URL "http://imagemagick.org/download/releases"
