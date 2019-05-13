@@ -1,8 +1,8 @@
-FROM node:8-jessie
+FROM node:8
 
 # Based on and all credit to https://store.docker.com/community/images/starefossen/node-imagemagick
 ENV MAGICK_URL "http://imagemagick.org/download/releases"
-ENV MAGICK_VERSION 7.0.8-45
+ENV MAGICK_VERSION 7.0.7-7
 
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 8277377A \
   && apt-get update -y \
