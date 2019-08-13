@@ -17,7 +17,7 @@ const generate = (text, cb) => {
   const topCaption = words.slice(0, half).join(' ');
   const bottomCaption = words.slice(half).join(' ');
 
-  const outputFile = `./images/mockbob-${randomstring.generate(5)}.jpg`;
+  const outputFile = `/app/images/mockbob-${randomstring.generate(5)}.jpg`;
 
   caption.path(
     `${__dirname}/img/mockbob.jpg`,
