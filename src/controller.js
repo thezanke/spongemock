@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 
     const body = {
       attachments: [{ fallback: mockText, pretext: `<@${userId}> says:`, image_url: imageUrl }],
-      delete_original: true,
+      replace_original: true,
       response_type: 'in_channel',
     };
     console.log(`Responding to slack at ${responseUrl} with body:`);
