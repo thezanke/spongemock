@@ -26,24 +26,28 @@ export class AppService {
   }
 
   async onGenerated(responseUrl, userId, imgPath, mockText) {
-    const baseName = path.basename(imgPath);
-    const imageUrl = `http://spongemock.alexhoward.io/images/${baseName}`;
+    try {
+      const baseName = path.basename(imgPath);
+      const imageUrl = `http://spongemock.alexhoward.io/images/${baseName}`;
 
-    if (!responseUrl) {
-      this.logger.log('generated', imageUrl);
-      return;
+      if (!responseUrl) {
+        this.logger.log('generated', imageUrl);
+        return;
+      }
+
+      const body = this.createBody(mockText, userId, imageUrl);
+
+      this.logger.log(`Responding to slack at ${responseUrl} with body:`);
+      this.logger.log(JSON.stringify(body, null, 2));
+
+      const result = await this.httpService
+        .post(responseUrl, body)
+        .pipe(map(res => res.data))
+        .toPromise();
+
+      this.logger.log(result);
+    } catch (e) {
+      this.logger.error(e.message);
     }
-
-    const body = this.createBody(mockText, userId, imageUrl);
-
-    this.logger.log(`Responding to slack at ${responseUrl} with body:`);
-    this.logger.log(JSON.stringify(body, null, 2));
-
-    const result = await this.httpService
-      .post(responseUrl, body)
-      .pipe(map(res => res.data))
-      .toPromise();
-
-    this.logger.log(result);
   }
 }
