@@ -8,7 +8,7 @@ export class AppService {
   private logger = new Logger('AppService');
 
   constructor(private readonly imageService: ImageService, private readonly httpService: HttpService) {
-    this.imageService.on('generated', this.onGenerated.bind(this));
+    this.imageService.on('generated', this.handleGenerateImage.bind(this));
   }
 
   createBody(mockText, userId, imageUrl) {
@@ -25,7 +25,7 @@ export class AppService {
     };
   }
 
-  async onGenerated(responseUrl, userId, imgPath, mockText) {
+  async handleGenerateImage(responseUrl, userId, imgPath, mockText) {
     try {
       const baseName = path.basename(imgPath);
       const imageUrl = `http://spongemock.alexhoward.io/images/${baseName}`;
