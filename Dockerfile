@@ -1,4 +1,4 @@
-FROM node:carbon-jessie as dist
+FROM node:12.13 as dist
 WORKDIR /tmp/
 COPY package.json package-lock.json ./
 RUN npm install
@@ -6,11 +6,11 @@ COPY tsconfig.json tsconfig.build.json ./
 COPY src/ src/
 RUN npm run build
 
-FROM node:carbon-jessie
+FROM node:12.13
 WORKDIR /app/
 RUN apt-get update -y \
   && apt-get install -y --no-install-recommends \
-  libpng-dev libjpeg-dev libtiff-dev libopenjpeg-dev gsfonts ghostscript \
+  libpng-dev libjpeg-dev libtiff-dev gsfonts ghostscript \
   && apt-get remove -y imagemagick
 ENV MAGICK_VERSION 7.0.8-60
 COPY "./vendor/ImageMagick-${MAGICK_VERSION}.tar.gz" /source/
