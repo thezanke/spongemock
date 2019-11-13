@@ -1,3 +1,2 @@
-images/*
-!images/template.jpg
-!images/404bob.jpg
+images/*.jpg
+!images/
