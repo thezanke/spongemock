@@ -1,0 +1,3 @@
+images/*
+!images/template.jpg
+!images/404bob.jpg

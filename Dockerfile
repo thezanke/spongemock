@@ -28,6 +28,7 @@ RUN cd /source \
 RUN apt-get -y autoclean \
   && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* "/source/ImageMagick-${MAGICK_VERSION}"
+COPY images images/
 COPY --from=dist /tmp/node_modules ./node_modules
 COPY --from=dist /tmp/dist ./dist
 RUN npm prune --production
