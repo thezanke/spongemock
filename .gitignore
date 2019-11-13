@@ -37,4 +37,5 @@ lerna-debug.log*
 .env
 
 /images/*.jpg
+!/images/template.jpg
 *.ignore*

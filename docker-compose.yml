@@ -3,14 +3,11 @@ services:
   app:
     build: .
     user: "node"
-    working_dir: /home/node/app
     environment:
       - NODE_ENV=production
     volumes:
-      - ./src:/home/node/app/src
-      - ./images:/home/node/app/images
+      - ./images:/app/images
     expose:
       - "5000"
-    command: "npm run dev"
     ports:
       - 5000:5000

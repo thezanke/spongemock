@@ -1,8 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, HttpService } from '@nestjs/common';
+import { map } from 'rxjs/operators';
+import * as path from 'path';
+import { ImageService } from './image/image.service';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  private logger = new Logger('AppService');
+
+  constructor(private readonly imageService: ImageService, private readonly httpService: HttpService) {
+    this.imageService.on('generated', this.onGenerated.bind(this));
+  }
+
+  createBody(mockText, userId, imageUrl) {
+    return {
+      attachments: [
+        {
+          fallback: mockText,
+          pretext: `<@${userId}> says:`,
+          image_url: imageUrl,
+        },
+      ],
+      replace_original: 'true',
+      response_type: 'in_channel',
+    };
+  }
+
+  async onGenerated(responseUrl, userId, imgPath, mockText) {
+    const baseName = path.basename(imgPath);
+    const imageUrl = `http://spongemock.alexhoward.io/images/${baseName}`;
+
+    if (!responseUrl) {
+      this.logger.log('generated', imageUrl);
+      return;
+    }
+
+    const body = this.createBody(mockText, userId, imageUrl);
+
+    this.logger.log(`Responding to slack at ${responseUrl} with body:`);
+    this.logger.log(JSON.stringify(body, null, 2));
+
+    const result = await this.httpService
+      .post(responseUrl, body)
+      .pipe(map(res => res.data))
+      .toPromise();
+
+    this.logger.log(result);
   }
 }
