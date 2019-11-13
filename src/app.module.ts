@@ -1,4 +1,5 @@
-import { Module, HttpService, HttpModule } from '@nestjs/common';
+import { Module, HttpModule } from '@nestjs/common';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ImageModule } from './image/image.module';

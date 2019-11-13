@@ -38,4 +38,5 @@ lerna-debug.log*
 
 /images/*.jpg
 !/images/template.jpg
+!/images/404bob.jpg
 *.ignore*

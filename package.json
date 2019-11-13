@@ -22,6 +22,7 @@
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
+    "@nestjs/serve-static": "^1.0.1",
     "@types/randomstring": "^1.1.6",
     "caption": "^0.1.1",
     "randomstring": "^1.1.5",

@@ -1,8 +1,9 @@
 FROM node:carbon-jessie as dist
 WORKDIR /tmp/
-COPY package.json package-lock.json tsconfig.json tsconfig.build.json ./
-COPY src/ src/
+COPY package.json package-lock.json ./
 RUN npm install
+COPY tsconfig.json tsconfig.build.json ./
+COPY src/ src/
 RUN npm run build
 
 FROM node:carbon-jessie
