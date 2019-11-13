@@ -28,9 +28,9 @@ RUN cd /source \
 RUN apt-get -y autoclean \
   && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* "/source/ImageMagick-${MAGICK_VERSION}"
-COPY --chown=node:node templates/ templates/
+COPY --chown=root:root images/ images/
+COPY --chown=root:root templates/ templates/
 COPY --from=dist /tmp/node_modules ./node_modules
 COPY --from=dist /tmp/dist ./dist
-USER node
 RUN npm prune --production
 CMD ["node", "dist/main.js"]
