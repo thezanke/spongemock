@@ -23,6 +23,7 @@ spec:
       containers:
         - name: spongemock
           image: ghcr.io/thezanke/spongemock:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           volumeMounts:

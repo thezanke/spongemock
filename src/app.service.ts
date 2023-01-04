@@ -28,7 +28,7 @@ export class AppService {
   async handleGenerateImage(responseUrl, userId, imgPath, mockText) {
     try {
       const baseName = path.basename(imgPath);
-      const imageUrl = `http://spongemock.alexhoward.io/images/${baseName}`;
+      const imageUrl = `http://spongemock.scummy.dev/images/${baseName}`;
 
       if (!responseUrl) {
         this.logger.log('generated', imageUrl);
