@@ -19,10 +19,10 @@ spec:
           persistentVolumeClaim:
             claimName: spongemock-pvc
       imagePullSecrets:
-        - name: gitlab-regcred
+        - name: ghcr-regcred
       containers:
         - name: spongemock
-          image: registry.gitlab.com/thezanke/slack-mock:v2.0.4
+          image: ghcr.io/thezanke/spongemock:latest
           ports:
             - containerPort: 5000
           volumeMounts:
