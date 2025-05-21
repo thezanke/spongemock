@@ -7,6 +7,7 @@ COPY src/ src/
 RUN npm run build
 
 FROM node:12.13
+LABEL org.opencontainers.image.source=https://github.com/thezanke/spongemock
 WORKDIR /app/
 RUN apt-get update -y \
   && apt-get install -y --no-install-recommends \
