@@ -6,7 +6,7 @@ COPY tsconfig.json tsconfig.build.json ./
 COPY src/ src/
 RUN npm run build
 
-FROM node:24.0.2-slim
+FROM node:24.0.2
 LABEL org.opencontainers.image.source=https://github.com/thezanke/spongemock
 WORKDIR /app/
 RUN apt-get update -y \
