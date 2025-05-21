@@ -1,4 +1,4 @@
-FROM node:12.13 as dist
+FROM node:24.0.2 as dist
 WORKDIR /tmp/
 COPY package.json package-lock.json ./
 RUN npm install
@@ -6,7 +6,7 @@ COPY tsconfig.json tsconfig.build.json ./
 COPY src/ src/
 RUN npm run build
 
-FROM node:12.13
+FROM node:24.0.2-slim
 LABEL org.opencontainers.image.source=https://github.com/thezanke/spongemock
 WORKDIR /app/
 RUN apt-get update -y \
