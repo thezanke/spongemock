@@ -1,4 +1,4 @@
-ARG NODE_VERSION=20.19.4
+ARG NODE_VERSION=24.0.2
 ARG MAGICK_VERSION=7.1.2-2
 
 FROM node:${NODE_VERSION} as dist
@@ -13,10 +13,12 @@ FROM node:${NODE_VERSION}
 ARG MAGICK_VERSION
 LABEL org.opencontainers.image.source=https://github.com/thezanke/spongemock
 WORKDIR /app/
-RUN apt-get update -y \
-  && apt-get install -y --no-install-recommends \
-  libpng-dev libjpeg-dev libtiff-dev gsfonts ghostscript \
-  && apt-get remove -y imagemagick
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+      libpng-dev libjpeg-dev libtiff-dev ghostscript fontconfig \
+      fonts-urw-base35 fonts-dejavu-core fonts-liberation && \
+    fc-cache -f && \
+    apt-get remove -y imagemagick
 COPY "./vendor/ImageMagick-${MAGICK_VERSION}.tar.gz" /source/
 RUN cd /source \
   && tar xfz "ImageMagick-${MAGICK_VERSION}.tar.gz" \
