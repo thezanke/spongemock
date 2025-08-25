@@ -1,4 +1,7 @@
-FROM node:24.0.2 as dist
+ARG NODE_VERSION=20.19.4
+ARG MAGICK_VERSION=7.1.2-2
+
+FROM node:${NODE_VERSION} as dist
 WORKDIR /tmp/
 COPY package.json package-lock.json ./
 RUN npm install
@@ -6,14 +9,14 @@ COPY tsconfig.json tsconfig.build.json ./
 COPY src/ src/
 RUN npm run build
 
-FROM node:24.0.2
+FROM node:${NODE_VERSION}
+ARG MAGICK_VERSION
 LABEL org.opencontainers.image.source=https://github.com/thezanke/spongemock
 WORKDIR /app/
 RUN apt-get update -y \
   && apt-get install -y --no-install-recommends \
   libpng-dev libjpeg-dev libtiff-dev gsfonts ghostscript \
   && apt-get remove -y imagemagick
-ENV MAGICK_VERSION 7.0.8-60
 COPY "./vendor/ImageMagick-${MAGICK_VERSION}.tar.gz" /source/
 RUN cd /source \
   && tar xfz "ImageMagick-${MAGICK_VERSION}.tar.gz" \
