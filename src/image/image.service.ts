@@ -31,8 +31,6 @@ export class ImageService extends EventEmitter {
 
     const outputFile = path.join(BASE_IMAGE_PATH, `mockbob-${randomstring.generate(5)}.jpg`);
 
-    console.log(TEMPLATES_PATH);
-    
     return new Promise<string>((resolve, reject) => {
       caption.path(
         path.join(TEMPLATES_PATH, 'spongemock.jpg'),
