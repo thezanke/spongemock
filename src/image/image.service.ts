@@ -24,7 +24,7 @@ export class ImageService extends EventEmitter {
     this.logger.log(`generating meme for: "${text}"`);
 
     const mockText = this.randomizeCase(text);
-    const words = mockText.split(' ');
+    const words = mockText.split(' '); 
     const half = Math.ceil(words.length / 2);
     const topCaption = words.slice(0, half).join(' ');
     const bottomCaption = words.slice(half).join(' ');
@@ -33,22 +33,29 @@ export class ImageService extends EventEmitter {
 
     console.log(TEMPLATES_PATH);
     
-    caption.path(
-      path.join(TEMPLATES_PATH, 'spongemock.jpg'),
-      {
-        caption: topCaption,
-        bottomCaption,
-        outputFile,
-      },
-      (err, imgPath) => {
-        if (err) {
-          this.logger.error(err.message);
-          return;
-        }
+    return new Promise<string>((resolve, reject) => {
+      caption.path(
+        path.join(TEMPLATES_PATH, 'spongemock.jpg'),
+        {
+          caption: topCaption,
+          bottomCaption,
+          outputFile,
+        },
+        (err, imgPath) => {
+          if (err) {
+            this.logger.error(err.message);
+            reject(err);
+            return;
+          }
 
-        this.emit('generated', responseUrl, userId, imgPath, mockText);
-      },
-    );
+          if (responseUrl && userId) {
+            this.emit('generated', responseUrl, userId, imgPath, mockText);
+          }
+
+          resolve(imgPath);
+        },
+      );
+    });
   }
 
   getImageOrFallbackPath(imageName) {
